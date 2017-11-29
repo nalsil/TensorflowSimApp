@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorBackMain1">#ad3235</color>
+    <color name="colorBackMain2">#a54048</color>
+
+    <color name="black_color">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="green">#688f2b</color>
+
+    <!-- ff30587c ff97c03d -->
+
+    <color name="sunday_text_color">#446688</color>
+    <color name="calendar_owner_text_color">#bebebe</color>
+
+    <color name="material_purple_500">#9c27b0</color>
+    <color name="material_indigo_500">#3f51b5</color>
+    <color name="material_blue_500">#2196f3</color>
+    <color name="material_lime_500">#cddc39</color>
+
+
+    <!-- A light Holo shade of blue -->
+    <!-- A light Holo shade of green -->
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <!-- A dark Holo shade of green -->
+    <!-- A dark Holo shade of red -->
+    <!-- A Holo shade of purple -->
+    <!-- A light Holo shade of orange -->
+    <!-- A dark Holo shade of orange -->
+    <!-- A really bright Holo shade of blue -->
+
+    <color name="bg_item_normal_state">@android:color/transparent</color>
+    <color name="bg_item_dragging_state">@android:color/transparent</color>
+    <color name="bg_item_dragging_active_state">@android:color/transparent</color>
+    <color name="bg_item_swiping_state">@android:color/transparent</color>
+    <color name="bg_item_swiping_active_state">#ff9999ff</color>
+
+    <color name="bg_group_item_normal_state">#ffddffdd</color>
+    <color name="bg_group_item_normal_pressed_state">#ff99cc99</color>
+    <color name="bg_group_item_expanded_state">#ff88dd88</color>
+    <color name="bg_group_item_expanded_pressed_state">#ff99cc99</color>
+    <color name="bg_group_item_dragging_state">#ffeeccff</color>
+    <color name="bg_group_item_dragging_active_state">#ffee99ff</color>
+    <color name="bg_group_item_swiping_state">#ddccff</color>
+    <color name="bg_group_item_swiping_active_state">#ffbb99ff</color>
+
+    <color name="bg_swipe_item_neutral">@android:color/transparent</color>
+    <color name="bg_swipe_item_pinned">#fff9930d</color>
+    <color name="bg_swipe_item_dismiss">#ff2f8b2a</color>
+    <color name="bg_swipe_item_gray">#999999</color>
+    <color name="bg_swipe_group_item_pinned">#fff45f30</color>
+    <color name="bg_swipe_group_item_dismiss">#ff295db3</color>
+
+    <color name="snackbar_action_color_done">#ffccccff</color>
+
+    <color name="expandable_item_indicator_color">#42000000</color>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_toc"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/app_name" />
+    </group>
+
+    <item android:title="DeepLearningZeroToAll" >
+        <menu>
+            <item
+                android:id="@+id/nav_linearregression"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Linear Regression" />
+
+            <item
+                android:id="@+id/nav_MinimizingCostGradientUpdate"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Minimizing Cost Gradient Update" />
+
+            <item
+                android:id="@+id/nav_MultiVariableMatmulLinearRegression"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Multi-Variable Matmul Linear Regression" />
+
+        </menu>
+    </item>
+
+</menu>

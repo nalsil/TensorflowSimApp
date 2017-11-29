@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DL4Mobile</string>
+    <string name="app_company_name">John sungjin park</string>
+    <string name="app_copyright" translatable="false">Copyright \u00A9 2017 \u002D 2017</string>
+    <string name="app_url" translatable="false">http://nalsil.tistory.com</string>
+
+    <string name="AD_UNIT_ID" translatable="false">ca-app-pub-6989041408150741/2442828220</string>
+
+    <!-- about start -->
+    <string name="about_license_title" translatable="false">License:</string>
+    <string name="about_license_name" translatable="false">Licensed under the Apache License, Version 2.0</string>
+    <string name="about_license_url" translatable="false">http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="about_description_title">Description:</string>
+    <string name="about_description_text"><![CDATA[<p> This app was implemented using a learned model from TensorFlow. <br /> The basic implementation uses the educational sample of Professor Kim Sung-hoon, professor of <a href=\'https://hunkim.github.io/ml/\'> "Deep Learning for Everyone(DeepLearningZeroToAll)"</a>   to create a model file, and provides a sample using the optimized model. <br /> Machine learning algorithms that are not part of the lecture are also implemented step-by-step on mobile. </ p> <br/> Reference free ebook: Building Mobile Applications with TensorFlow (<a href='http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp'>http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp</a>)  ]]></string>
+    <string name="about_opensource_title" translatable="false">Based Opensource:</string>
+
+    <string name="about_libraries_title">Libraries Used:</string>
+    <string name="about_library_material" translatable="false">Material Design Icons</string>
+    <string name="about_library_material_url" translatable="false">https://design.google.com/icons</string>
+
+    <string name="about_library_eventbus" translatable="false">EventBus</string>
+    <string name="about_library_eventbus_url" translatable="false">https://github.com/greenrobot/EventBus</string>
+    <string name="about_library_tensorflowmobile" translatable="false">TensorFlow Mobile</string>
+    <string name="about_library_tensorflowmobile_url" translatable="false">https://www.tensorflow.org/mobile/</string>
+    <string name="about_library_butterknife" translatable="false">Butter Knife(Field and method binding for Android)</string>
+    <string name="about_library_butterknife_url" translatable="false">http://jakewharton.github.io/butterknife/</string>
+    <string name="about_library_materialdialogs" translatable="false">Material Dialogs</string>
+    <string name="about_library_materialdialogs_url" translatable="false">https://github.com/afollestad/material-dialogs</string>
+
+    <!-- about end -->
+
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="info_adview_comming">Ads will appear here.</string>
+    <string name="action_about">About</string>
+    <string name="action_accessinfo">Access permission information</string>
+    <string name="permit_access_desc_title">The following authorization is required to use the service.</string>
+    <string name="permit_essential_access_title">Essential access permissions</string>
+    <string name="permit_essential_access_extra_title">If you do not approve essential access permissions, your app will not be able to run. Please exit the app if you do not want to be approved.</string>
+    <string name="permit_selective_access_title">Selective access permissions</string>
+    <string name="permit_selective_access_extra_title">The service is available except for those functions that do not require selective access.</string>
+    <string name="permit_change_access_permit_title">How to change access permissions</string>
+    <string name="permit_change_access_permit">Settings → Application Manager → DL4Mobile → Permissions</string>
+    <string name="permit_none">None</string>
+    <string name="permit_access_network_state">• Full network access</string>
+    <string name="permit_internet">• Receive data from internet</string>
+    <string name="permit_wake_lock">• Prevent phone from sleeping</string>
+    <string name="permit_view_network_connection">• View network connections</string>
+    <string name="permit_desc_firebase_analytics">Analyze user screen visits (firebase-analytics)</string>
+    <string name="permit_desc_firebase_ads">Display banner ads (firebase-ads)</string>
+
+
+</resources>

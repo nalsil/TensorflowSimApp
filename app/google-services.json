@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "159569528882",
+    "firebase_url": "https://tensorflow-simulator.firebaseio.com",
+    "project_id": "tensorflow-simulator",
+    "storage_bucket": "tensorflow-simulator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159569528882:android:4a2d0949de10e638",
+        "android_client_info": {
+          "package_name": "com.nalsil.tensorflowsimapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159569528882-hrr3s4lepnf1k266nb534m4ul7altfln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpWpEAAbGb_6LIsiDJbzzlOGb-57EwCx8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
