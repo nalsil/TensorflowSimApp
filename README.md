@@ -1,4 +1,4 @@
-# Deep learning for Mobile::DL4Mobile
+# Deep Learning for Mobile::DL4Mobile
 
 This app was implemented using a learned model from TensorFlow. 
 The basic implementation uses the educational sample of Professor Kim Sung-hoon, professor of 
