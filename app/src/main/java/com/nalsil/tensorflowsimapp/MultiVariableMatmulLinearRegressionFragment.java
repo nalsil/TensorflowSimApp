@@ -4,6 +4,7 @@ package com.nalsil.tensorflowsimapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,7 +110,7 @@ public class MultiVariableMatmulLinearRegressionFragment extends Fragment {
 
         String strInput = etInput1.getText().toString();
         String[] strInputs = strInput.split(",");
-        if (strInputs.length == 0 ) {
+        if (strInputs.length == 0 || TextUtils.isEmpty(strInput)) {
             Toast.makeText(getActivity(), "Floats separated by \",\" required", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -117,8 +118,13 @@ public class MultiVariableMatmulLinearRegressionFragment extends Fragment {
         // 1 - instance
         int idx = 0;
         float[] inputFloatsX = new float[strInputs.length];
-        for(String strItem : strInputs) {
-            inputFloatsX[idx++] = Float.parseFloat(strItem);
+        try {
+            for (String strItem : strInputs) {
+                inputFloatsX[idx++] = Float.parseFloat(strItem);
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         float[] results;
@@ -133,15 +139,20 @@ public class MultiVariableMatmulLinearRegressionFragment extends Fragment {
         // ==== multi-Instance ====
         strInput = etInput2.getText().toString();
         strInputs = strInput.split(",");
-        if (strInputs.length == 0 ) {
+        if (strInputs.length == 0 || TextUtils.isEmpty(strInput)) {
             Toast.makeText(getActivity(), "Floats separated by \",\" required", Toast.LENGTH_SHORT).show();
             return;
         }
 
         idx = 0;
         inputFloatsX = new float[strInputs.length];
-        for(String strItem : strInputs) {
-            inputFloatsX[idx++] = Float.parseFloat(strItem);
+        try {
+            for (String strItem : strInputs) {
+                inputFloatsX[idx++] = Float.parseFloat(strItem);
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         try {

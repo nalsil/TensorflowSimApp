@@ -4,6 +4,7 @@ package com.nalsil.tensorflowsimapp;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -91,15 +92,20 @@ public class LinearRegressionFragment extends Fragment {
 
         String strInput = etInput.getText().toString();
         String[] strInputs = strInput.split(",");
-        if (strInputs.length == 0 ) {
+        if (strInputs.length == 0  || TextUtils.isEmpty(strInput)) {
             Toast.makeText(getActivity(), "Floats separated by \",\" required", Toast.LENGTH_SHORT).show();
             return;
         }
 
         int idx = 0;
         float[] inputFloats = new float[strInputs.length];
-        for(String strItem : strInputs) {
-            inputFloats[idx++] = Float.parseFloat(strItem);
+        try {
+            for (String strItem : strInputs) {
+                inputFloats[idx++] = Float.parseFloat(strItem);
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         float[] results;

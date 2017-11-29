@@ -63,7 +63,7 @@ public class TOCFragment extends Fragment {
         String strInfo1 = "";
         strInfo1 += "<h3>Deep Learning Zero to All</h3>";
         strInfo1 += "<ul>";
-        strInfo1 += "<li><a href=\"fragment://" + LinearRegressionFragment.class.getSimpleName() + "\"> Linear Regression </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-02-3-linear_regression_tensorflow.org_model.py\">this source</a> </li>";
+        strInfo1 += "<li><a href=\"fragment://" + LinearRegressionFragment.class.getSimpleName() + "\"> Linear Regression </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-02-3-linear_regression_tensorflow.org_model.py\">this source</a> </li>" ;
         strInfo1 += "<li><a href=\"fragment://" + MinimizingCostGradientUpdateFragment.class.getSimpleName() + "\"> Minimizing Cost Gradient Update </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-03-2-minimizing_cost_gradient_update_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + MultiVariableMatmulLinearRegressionFragment.class.getSimpleName() + "\"> Multi-Variable Matmul Linear Regression </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-04-2-multi_variable_matmul_linear_regression_model.py\">this source</a> </li> ";
         strInfo1 += "</ul>";
