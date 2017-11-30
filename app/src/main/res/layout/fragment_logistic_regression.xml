@@ -3,7 +3,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 xmlns:ads="http://schemas.android.com/apk/res-auto"
-tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFragment">
+tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
 
 <ScrollView
     android:id="@+id/layoutContentView"
@@ -33,7 +33,7 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="x =[x1, x2, x3] " />
+                android:text="Inputs = " />
 
             <EditText
                 android:id="@+id/etInput1"
@@ -42,12 +42,12 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
                 android:layout_weight="1"
                 android:digits="-0123456789.,"
                 android:ems="10"
-                android:text="100, 70, 101" />
+                android:text="1,2,2,3,3,1,4,3,5,3,6,2" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutOutput1"
+            android:id="@+id/layoutHypothesis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutInput1"
@@ -57,48 +57,20 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/tvOutputHypothesisTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="output =" />
+                android:text="Hypothesis =" />
 
             <TextView
-                android:id="@+id/tvOutput1"
+                android:id="@+id/tvOutputHypothesis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutHypothesis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutOutput1"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:id="@+id/textView3cost"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:text="x = [[x1,x2,x3],..]" />
-
-            <EditText
-                android:id="@+id/etInput2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:digits="-0123456789.,"
-                android:ems="10"
-                android:text="60, 70, 110, 90, 100, 80" />
 
         </LinearLayout>
 
@@ -118,10 +90,38 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="output =" />
+                android:text="Correct =" />
 
             <TextView
-                android:id="@+id/tvOutput2"
+                android:id="@+id/tvOutputCorrect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutAccuracy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutCorrect"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/tvAccuracyTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:ems="10"
+                android:text="Accuracy =" />
+
+            <TextView
+                android:id="@+id/tvOutputAccuracy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
             android:id="@+id/layoutControl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutCorrect"
+            android:layout_below="@+id/layoutAccuracy"
             android:orientation="horizontal">
 
             <Button

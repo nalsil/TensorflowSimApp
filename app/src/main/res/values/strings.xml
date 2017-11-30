@@ -12,7 +12,7 @@
     <string name="about_license_name" translatable="false">Licensed under the Apache License, Version 2.0</string>
     <string name="about_license_url" translatable="false">http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="about_description_title">Description:</string>
-    <string name="about_description_text"><![CDATA[<p> This app was implemented using a learned model from TensorFlow. <br /> The basic implementation uses the educational sample of Professor Kim Sung-hoon, professor of <a href=\'https://hunkim.github.io/ml/\'> "Deep Learning for Everyone(DeepLearningZeroToAll)"</a>   to create a model file, and provides a sample using the optimized model. <br /> Machine learning algorithms that are not part of the lecture are also implemented step-by-step on mobile. </p> <br/> GitHub: <a href=\'https://github.com/nalsil/TensorflowSimApp\'>https://github.com/nalsil/TensorflowSimApp</a> <br/> Reference free ebook: Building Mobile Applications with TensorFlow (<a href=\'http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp\'>http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp</a>)  ]]></string>
+    <string name="about_description_text"><![CDATA[<p> This app was implemented using a learned model from TensorFlow. <br /> The basic implementation uses the educational sample of Professor Kim Sung-hoon, professor of <a href=\'https://hunkim.github.io/ml/\'> "Deep Learning for Everyone(DeepLearningZeroToAll)"</a>   to create a model file, and provides a sample using the optimized model. <br /> Machine learning algorithms that are not part of the lecture are also implemented step-by-step on mobile. </p> GitHub: <a href=\'https://github.com/nalsil/TensorflowSimApp\'>https://github.com/nalsil/TensorflowSimApp</a> <br/> Reference free ebook: Building Mobile Applications with TensorFlow (<a href=\'http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp\'>http://www.oreilly.com/data/free/building-mobile-applications-with-tensorflow.csp</a>)  ]]></string>
     <string name="about_opensource_title" translatable="false">Based Opensource:</string>
 
     <string name="about_libraries_title">Libraries Used:</string>
@@ -52,6 +52,9 @@
     <string name="permit_view_network_connection">• View network connections</string>
     <string name="permit_desc_firebase_analytics">Analyze user screen visits (firebase-analytics)</string>
     <string name="permit_desc_firebase_ads">Display banner ads (firebase-ads)</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -197,6 +197,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_MultiVariableMatmulLinearRegression:
                 fragmentClass = MultiVariableMatmulLinearRegressionFragment.class;
                 break;
+            case R.id.nav_LogisticRegression:
+                fragmentClass = LogisticRegressionFragment.class;
+                break;
             default:
                 fragmentClass = TOCFragment.class;
         }
@@ -243,6 +246,8 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_MinimizingCostGradientUpdate);
         } else if (strItem.equals(MultiVariableMatmulLinearRegressionFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_MultiVariableMatmulLinearRegression);
+        } else if (strItem.equals(LogisticRegressionFragment.class.getSimpleName())) {
+            onNavigationItemById(R.id.nav_LogisticRegression);
         } else {
             onNavigationItemById(R.id.nav_toc);
         }
