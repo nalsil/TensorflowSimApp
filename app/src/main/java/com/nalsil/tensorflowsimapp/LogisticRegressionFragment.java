@@ -56,7 +56,9 @@ public class LogisticRegressionFragment extends Fragment {
     private static final String OUTPUT_NODE_HYPO = "hypothesis";
     private static final String OUTPUT_NODE_PRED = "predicted";
     private static final String OUTPUT_NODE_ACCU = "accuracy";
-
+    private static final String[] OUTPUT_NODES_HYPO = new String[] {OUTPUT_NODE_HYPO};
+    private static final String[] OUTPUT_NODES_PRED = new String[] {OUTPUT_NODE_PRED};
+    private static final String[] OUTPUT_NODES_ACCU = new String[] {OUTPUT_NODE_ACCU};
 
     private boolean logStats = false;
     private TensorFlowInferenceInterface inferenceInterface;
@@ -176,7 +178,7 @@ public class LogisticRegressionFragment extends Fragment {
         FloatBuffer.wrap(inputFloats);
 
         inferenceInterface.feed(INPUT_NODE_X, inputFloats, nInstance, nFeatures);
-        inferenceInterface.run(new String[] {OUTPUT_NODE_HYPO}, logStats);
+        inferenceInterface.run(OUTPUT_NODES_HYPO, logStats);
 
         float[] result = new float[nInstance];
         inferenceInterface.fetch(OUTPUT_NODE_HYPO, result);
@@ -189,7 +191,7 @@ public class LogisticRegressionFragment extends Fragment {
         FloatBuffer.wrap(inputFloats);
 
         inferenceInterface.feed(INPUT_NODE_X, inputFloats, nInstance, nFeatures);
-        inferenceInterface.run(new String[] {OUTPUT_NODE_PRED}, logStats);
+        inferenceInterface.run(OUTPUT_NODES_PRED, logStats);
 
         float[] result = new float[nInstance];
         inferenceInterface.fetch(OUTPUT_NODE_PRED, result);
@@ -203,7 +205,7 @@ public class LogisticRegressionFragment extends Fragment {
 
         inferenceInterface.feed(INPUT_NODE_X, inputFloats, nInstance, nFeatures);
         inferenceInterface.feed(INPUT_NODE_Y, yFloats, nInstance, 1);
-        inferenceInterface.run(new String[] {OUTPUT_NODE_ACCU}, logStats);
+        inferenceInterface.run(OUTPUT_NODES_ACCU, logStats);
 
         float[] result = new float[1];
         inferenceInterface.fetch(OUTPUT_NODE_ACCU, result);

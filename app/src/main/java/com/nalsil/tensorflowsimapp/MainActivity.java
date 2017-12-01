@@ -200,6 +200,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_LogisticRegression:
                 fragmentClass = LogisticRegressionFragment.class;
                 break;
+            case R.id.nav_SoftmaxClassifier:
+                fragmentClass = SoftmaxClassifierFragment.class;
+                break;
+
+
+
             default:
                 fragmentClass = TOCFragment.class;
         }
@@ -248,6 +254,8 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_MultiVariableMatmulLinearRegression);
         } else if (strItem.equals(LogisticRegressionFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_LogisticRegression);
+        } else if (strItem.equals(SoftmaxClassifierFragment.class.getSimpleName())) {
+            onNavigationItemById(R.id.nav_SoftmaxClassifier);
         } else {
             onNavigationItemById(R.id.nav_toc);
         }
