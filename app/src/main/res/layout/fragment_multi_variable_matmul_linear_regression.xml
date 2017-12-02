@@ -131,54 +131,42 @@ tools:context="com.nalsil.tensorflowsimapp.MultiVariableMatmulLinearRegressionFr
 
 
         <LinearLayout
-            android:id="@+id/layoutControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutCorrect"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnRandom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Random" />
-
-
-            <Button
-                android:id="@+id/btnReset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Reset" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutRun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutControl"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnRun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Run" />
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
             android:id="@+id/layoutInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutControl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRandom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Random" />
+
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reset" />
+
+                <Button
+                    android:id="@+id/btnRun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Run" />
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvInfo"

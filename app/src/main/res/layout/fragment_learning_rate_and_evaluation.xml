@@ -3,7 +3,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 xmlns:ads="http://schemas.android.com/apk/res-auto"
-tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
+tools:context="com.nalsil.tensorflowsimapp.LearningRateAndEvaluationFragment">
 
 <ScrollView
     android:id="@+id/layoutContentView"
@@ -21,19 +21,18 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
             android:id="@+id/layoutInput1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:gravity="top"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvInput1Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="Inputs = " />
+                android:text="x =[[x1, x2, x3], ...] " />
 
             <EditText
                 android:id="@+id/etInput1"
@@ -42,12 +41,12 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
                 android:layout_weight="1"
                 android:digits="-0123456789.,"
                 android:ems="10"
-                android:text="1,2,2,3,3,1,4,3,5,3,6,2" />
+                android:text="2,1,1,3,1,2,3,3,4" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutHypothesis"
+            android:id="@+id/layoutOutput11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutInput1"
@@ -57,43 +56,42 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/tvOutputHypothesisTitle"
+                android:id="@+id/tvOutput11Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="Hypothesis =" />
+                android:text="hypothesis =" />
 
             <TextView
-                android:id="@+id/tvOutputHypothesis"
+                android:id="@+id/tvOutput1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10" />
 
-
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutCorrect"
+            android:id="@+id/layoutOutput12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutHypothesis"
+            android:layout_below="@+id/layoutOutput11"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tvOutput12Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="Correct =" />
+                android:text="prediction =" />
 
             <TextView
-                android:id="@+id/tvOutputCorrect"
+                android:id="@+id/tvOutput2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,33 +99,34 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
 
         </LinearLayout>
 
-
         <LinearLayout
-            android:id="@+id/layoutAccuracy"
+            android:id="@+id/layoutOutput22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutCorrect"
+            android:layout_below="@+id/layoutOutput12"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/tvAccuracyTitle"
+                android:id="@+id/tvOutput22Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="Accuracy =" />
+                android:text="accuracy =" />
 
             <TextView
-                android:id="@+id/tvOutputAccuracy"
+                android:id="@+id/tvOutput3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10" />
 
         </LinearLayout>
+
+
 
 
         <LinearLayout
@@ -135,12 +134,13 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_below="@+id/layoutRun"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/layoutControl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <Button
@@ -167,6 +167,7 @@ tools:context="com.nalsil.tensorflowsimapp.LogisticRegressionFragment">
 
 
             </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tvInfo"

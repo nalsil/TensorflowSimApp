@@ -73,27 +73,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layoutRun"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layoutOutput"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnRun"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Run" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/layoutGraph"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/layoutInfo"
-                android:layout_below="@+id/layoutRun"
+                android:layout_below="@id/layoutOutput"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
@@ -111,6 +95,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layoutRun"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnRun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Run" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tvInfo"

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private MaterialDialog dialog;
+    private Menu menuNav;
 
     private static String deviceId;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity
 
         nvDrawer = (NavigationView) findViewById(R.id.nav_view);
         nvDrawer.setNavigationItemSelectedListener(this);
+        menuNav = nvDrawer.getMenu();
+
 
         //============================= Start of Version =============================
         nvDrawer.setNavigationItemSelectedListener(this);
@@ -168,12 +171,12 @@ public class MainActivity extends AppCompatActivity
 
         onNavigationItemById(item.getItemId());
 
-        if ( item != null ) {
-            // Highlight the selected item has been done by NavigationView
-            item.setChecked(true);
-            // Set action bar title
-            setTitle(item.getTitle());
-        }
+//        if ( item != null ) {
+//            // Highlight the selected item has been done by NavigationView
+//            item.setChecked(true);
+//            // Set action bar title
+//            setTitle(item.getTitle());
+//        }
         // Close the navigation drawer
         mDrawer.closeDrawers();
         return true;
@@ -203,8 +206,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_SoftmaxClassifier:
                 fragmentClass = SoftmaxClassifierFragment.class;
                 break;
-
-
+            case R.id.nav_LearningRateAndEvaluation:
+                fragmentClass = LearningRateAndEvaluationFragment.class;
+                break;
 
             default:
                 fragmentClass = TOCFragment.class;
@@ -219,6 +223,8 @@ public class MainActivity extends AppCompatActivity
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        setTitleById(id);
     }
 
 
@@ -256,10 +262,25 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_LogisticRegression);
         } else if (strItem.equals(SoftmaxClassifierFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_SoftmaxClassifier);
+        } else if (strItem.equals(LearningRateAndEvaluationFragment.class.getSimpleName())) {
+            onNavigationItemById(R.id.nav_LearningRateAndEvaluation);
         } else {
             onNavigationItemById(R.id.nav_toc);
         }
     };
+
+    private void setTitleById(int id) {
+        MenuItem menuItem = menuNav.findItem(id);
+        if ( menuItem != null ) {
+            // Highlight the selected item has been done by NavigationView
+            menuItem.setChecked(true);
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+        } else {
+            setTitle(R.string.app_name);
+        }
+    }
+
 
     private void runOnce()  {
         String strRunOnce = "pref_runOnce";

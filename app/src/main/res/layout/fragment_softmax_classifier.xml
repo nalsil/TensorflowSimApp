@@ -87,7 +87,7 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="tf.argmax(hypothesis,1) =" />
+                android:text="argmax(hypo)=" />
 
             <TextView
                 android:id="@+id/tvOutput12"
@@ -175,7 +175,7 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="tf.argmax(hypothesis,1) =" />
+                android:text="argmax(hypo)=" />
 
             <TextView
                 android:id="@+id/tvOutput22"
@@ -264,7 +264,7 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="tf.argmax(hypothesis,1) =" />
+                android:text="argmax(hypo)=" />
 
             <TextView
                 android:id="@+id/tvOutput32"
@@ -353,7 +353,7 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:ems="10"
-                android:text="tf.argmax(hypothesis,1) =" />
+                android:text="argmax(hypo)=" />
 
             <TextView
                 android:id="@+id/tvOutput42"
@@ -364,46 +364,7 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layoutControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutOutput42"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnRandom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Random" />
-
-
-            <Button
-                android:id="@+id/btnReset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Reset" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutRun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layoutControl"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnRun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Run" />
-
-        </LinearLayout>
 
 
         <LinearLayout
@@ -413,6 +374,37 @@ tools:context="com.nalsil.tensorflowsimapp.SoftmaxClassifierFragment">
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/layoutRun"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutControl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRandom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Random" />
+
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reset" />
+
+                <Button
+                    android:id="@+id/btnRun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Run" />
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvInfo"

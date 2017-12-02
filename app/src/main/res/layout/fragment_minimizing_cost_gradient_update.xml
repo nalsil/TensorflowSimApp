@@ -21,6 +21,7 @@ tools:context="com.nalsil.tensorflowsimapp.MinimizingCostGradientUpdateFragment"
             android:id="@+id/layoutInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="top"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -50,6 +51,7 @@ tools:context="com.nalsil.tensorflowsimapp.MinimizingCostGradientUpdateFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutInput"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -77,6 +79,7 @@ tools:context="com.nalsil.tensorflowsimapp.MinimizingCostGradientUpdateFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutOutput"
+            android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -101,27 +104,11 @@ tools:context="com.nalsil.tensorflowsimapp.MinimizingCostGradientUpdateFragment"
 
 
         <LinearLayout
-            android:id="@+id/layoutRun"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layoutcost"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnRun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Run" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/layoutGraph"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/layoutInfo"
-            android:layout_below="@+id/layoutRun"
+            android:layout_below="@id/layoutcost"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:paddingBottom="5dp"
@@ -139,6 +126,21 @@ tools:context="com.nalsil.tensorflowsimapp.MinimizingCostGradientUpdateFragment"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layoutRun"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnRun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Run" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvInfo"
