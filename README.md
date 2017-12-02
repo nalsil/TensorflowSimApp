@@ -17,3 +17,4 @@ The source implemented with Tensorflow is as follows.
 * Minimizing Cost Gradient Update: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-03-2-minimizing_cost_gradient_update_model.py
 * Multi-Variable Matmul Linear Regression: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-04-2-multi_variable_matmul_linear_regression_model.py
 * Logistic Regression Classifier: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-05-1-logistic_regression_model.py
+* Softmax Classifier: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-06-1-softmax_classifier_model.py
