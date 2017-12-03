@@ -19,3 +19,4 @@ The source implemented with Tensorflow is as follows.
 * Logistic Regression Classifier: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-05-1-logistic_regression_model.py
 * Softmax Classifier: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-06-1-softmax_classifier_model.py
 * Learning rate and Evaluation: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-1-learning_rate_and_evaluation_model.py
+* Mnist introduction: https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py
