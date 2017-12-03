@@ -144,11 +144,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.home) {
-//            mDrawer.openDrawer(Gravity.START);
-//        }
-
         if (id == R.id.action_accessinfo) {
             showPermissionInfo();
             return true;
@@ -171,12 +166,6 @@ public class MainActivity extends AppCompatActivity
 
         onNavigationItemById(item.getItemId());
 
-//        if ( item != null ) {
-//            // Highlight the selected item has been done by NavigationView
-//            item.setChecked(true);
-//            // Set action bar title
-//            setTitle(item.getTitle());
-//        }
         // Close the navigation drawer
         mDrawer.closeDrawers();
         return true;
@@ -209,7 +198,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_LearningRateAndEvaluation:
                 fragmentClass = LearningRateAndEvaluationFragment.class;
                 break;
+            case R.id.nav_MnistIntroduction:
+                fragmentClass = MnistIntroductionFragment.class;
+                break;
 
+
+            //
             default:
                 fragmentClass = TOCFragment.class;
         }
@@ -264,6 +258,8 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_SoftmaxClassifier);
         } else if (strItem.equals(LearningRateAndEvaluationFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_LearningRateAndEvaluation);
+        } else if (strItem.equals(MnistIntroductionFragment.class.getSimpleName())) {
+            onNavigationItemById(R.id.nav_MnistIntroduction);
         } else {
             onNavigationItemById(R.id.nav_toc);
         }

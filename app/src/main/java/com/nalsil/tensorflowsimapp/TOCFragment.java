@@ -69,6 +69,7 @@ public class TOCFragment extends Fragment {
         strInfo1 += "<li><a href=\"fragment://" + LogisticRegressionFragment.class.getSimpleName() + "\"> Logistic Regression </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-05-1-logistic_regression_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + SoftmaxClassifierFragment.class.getSimpleName() + "\"> Softmax Classifier </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-06-1-softmax_classifier_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + LearningRateAndEvaluationFragment.class.getSimpleName() + "\"> Learning Rate and Evaluation</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-1-learning_rate_and_evaluation_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + MnistIntroductionFragment.class.getSimpleName() + "\"> Mnist Introduction</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py\">this source</a> </li> ";
 
         strInfo1 += "</ul>";
         strInfo1 += "<br/><br/>";

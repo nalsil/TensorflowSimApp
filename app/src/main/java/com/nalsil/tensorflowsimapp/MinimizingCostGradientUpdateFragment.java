@@ -93,6 +93,10 @@ public class MinimizingCostGradientUpdateFragment extends Fragment {
     @Override public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
+        if (inferenceInterface != null) {
+            inferenceInterface.close();
+        }
     }
 
     @OnClick(R.id.btnRun)

@@ -85,6 +85,11 @@ public class LearningRateAndEvaluationFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
+        if (inferenceInterface != null) {
+            inferenceInterface.close();
+        }
+
     }
 
     @OnClick(R.id.btnRandom)

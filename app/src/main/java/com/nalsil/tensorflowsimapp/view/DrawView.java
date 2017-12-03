@@ -17,19 +17,30 @@
 package com.nalsil.tensorflowsimapp.view;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
+
 /**
  * Created by amitshekhar on 16/03/17.
  */
 
 public class DrawView extends View {
+
+    private final static String TAG = DrawView.class.getSimpleName();
+
     private Paint mPaint = new Paint();
     private DrawModel mModel;
     // 28x28 pixel Bitmap
     private Bitmap mOffscreenBitmap;
     private Canvas mOffscreenCanvas;
+
 
     private Matrix mMatrix = new Matrix();
     private Matrix mInvMatrix = new Matrix();
@@ -168,6 +179,47 @@ public class DrawView extends View {
             int b = pix & 0xff;
             retPixels[i] = 0xff - b;
         }
+
         return retPixels;
     }
+
+    public int[] getPixels() {
+        if (mOffscreenBitmap == null) {
+            return null;
+        }
+
+        int width = mOffscreenBitmap.getWidth();
+        int height = mOffscreenBitmap.getHeight();
+
+        // Get 28x28 pixel data from bitmap
+        int[] pixels = new int[width * height];
+        mOffscreenBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        for (int i = 0; i < pixels.length; ++i) {
+            // Set 0 for white and 255 for black pixel
+            int pix = pixels[i];
+            int b = pix & 0xff;
+            pixels[i] = 0xff - b;
+        }
+
+        return pixels;
+    }
+
+    public void setPixels(int[] pixels, int nLength) {
+        if (mOffscreenBitmap == null) {
+            return;
+        }
+
+        for (int i = 0; i < nLength; ++i) {
+            int pix = pixels[i];
+            pix = 0xff - pix;
+            pixels[i] = ((0xff) << 24)
+                    | ((pix & 0xff) << 16)
+                    | ((pix & 0xff) << 8)
+                    | ((pix & 0xff));
+        }
+        int width = mOffscreenBitmap.getWidth();
+        int height = mOffscreenBitmap.getHeight();
+        mOffscreenBitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+    }
+
 }

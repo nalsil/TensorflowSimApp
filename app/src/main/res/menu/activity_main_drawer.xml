@@ -41,7 +41,14 @@
                 android:id="@+id/nav_LearningRateAndEvaluation"
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="Learning Rate and Evaluation" />
+
+            <item
+                android:id="@+id/nav_MnistIntroduction"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="Mnist Introduction" />
+
         </menu>
+
     </item>
 
 </menu>

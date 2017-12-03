@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'filepicker'
+
+    publishedGroupId = 'com.github.angads25'
+    libraryName = 'File Picker'
+    artifact = 'filepicker'
+
+    libraryDescription = 'Android Library To pick Files from Device Storage.'
+
+    siteUrl = 'https://github.com/angads25/android-filepicker'
+    gitUrl = 'https://github.com/angads25/android-filepicker.git'
+
+    libraryVersion = '1.1.1'
+
+    developerId = 'angads25'
+    developerName = 'Angad Singh'
+    developerEmail = 'angads25@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 25
+        versionCode 12
+        versionName "1.1.1"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    return null
+}
+
+apply from: 'https://raw.githubusercontent.com/angads25/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/angads25/JCenter/master/bintrayv1.gradle'
