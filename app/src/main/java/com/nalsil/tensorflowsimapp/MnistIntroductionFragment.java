@@ -1,23 +1,29 @@
 package com.nalsil.tensorflowsimapp;
 
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,13 +70,15 @@ public class MnistIntroductionFragment extends Fragment  {
     @BindView(R.id.tvOutput1)TextView tvOutput1;
     @BindView(R.id.tvOutput2)TextView tvOutput2;
     @BindView(R.id.spFailed)Spinner spFailed;
+    @BindView(R.id.layoutBusy)LinearLayout layoutBusy;
 
     @BindView(R.id.tvInfo)TextView tvInfo;
     @BindView(R.id.adView)
     AdView mAdView;
 
     private FilePickerDialog dialog;
-    private final static int REQUEST_EXT_STORAGE_PERMIT = 9007;
+    private final static int REQUEST_EXT_STORAGE_PERMIT = 9001;
+    private final static int REQUEST_SHARE = 9002;
 
     private static final String MODEL_FILE = "file:///android_asset/optimized_lab_07_4_mnist_introduction.pb";
     private static final String INPUT_NODE_X = "X";
@@ -90,6 +98,9 @@ public class MnistIntroductionFragment extends Fragment  {
     private float[] arrTestImages;
     private ArrayList<Integer> arrFailed;
     private final static int nEvalCount = 1000;
+    private static int[] arrDisplayImage = new int[28*28];
+    private String strShareFilename = "";
+    private String strShareFullFilename = "";
 
     //================ For Mnist
     private static final int PIXEL_WIDTH = 28;
@@ -142,6 +153,20 @@ public class MnistIntroductionFragment extends Fragment  {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SHARE) {
+            if (TextUtils.isEmpty(strShareFullFilename)) return;
+
+            File deleteFor = new File(strShareFullFilename);
+            if (deleteFor.exists()) {
+                deleteFor.delete();
+            }
+        }
+    }
+
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT: {
@@ -159,7 +184,6 @@ public class MnistIntroductionFragment extends Fragment  {
         }
     }
 
-    private boolean permitCheck = false;
     public void onRequestPermission()
     {
         int permissionReadStorage = ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -169,7 +193,6 @@ public class MnistIntroductionFragment extends Fragment  {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, FilePickerDialog.EXTERNAL_READ_PERMISSION_GRANT);
         } else {
-            permitCheck = true;
             dialog.show();
         }
     }
@@ -211,26 +234,9 @@ public class MnistIntroductionFragment extends Fragment  {
         Date d = new Date();
         CharSequence strDateTime = DateFormat.format("yyyyMMddhhmmss", d.getTime());
         String strFilename = strDateTime + ".mnist";
-;
-        int[] arrData = mDrawView.getPixels();
-        byte[] arrBytes = new byte[arrData.length];
-
-        for(int i=0; i<arrData.length; i++) {
-            arrBytes[i] = (byte)arrData[i];
-        }
-
-        FileOutputStream fos = null;
-        try {
-            fos = getContext().openFileOutput(strFilename, Context.MODE_PRIVATE);
-            fos.write(arrBytes);
-            fos.close();
-
-            String strMsg = String.format("The %s file has been saved successfully.", strFilename);
-            Toast.makeText(getContext(), strMsg, Toast.LENGTH_SHORT).show();
-        } catch (IOException ex) {
-            Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
+        File file = new File(getContext().getFilesDir().toString(), strFilename);
+        String strFullname = file.getAbsolutePath();
+        saveImage(strFullname);
     }
 
     @OnClick(R.id.btnLoad)
@@ -307,11 +313,10 @@ public class MnistIntroductionFragment extends Fragment  {
         onRequestPermission();
     }
 
-
-    private static int[] arrDisplayImage = new int[28*28];
-
     @OnClick(R.id.btnAccuracy)
     public void btnAccuracy_OnClick() {
+
+        layoutBusy.setVisibility(View.VISIBLE);
 
         arrTestLabel = readMnistLabel("t10k-labels.idx1-ubyte");
         arrTestLabelOneHot = readMnistLabelwithOneHotEncoding("t10k-labels.idx1-ubyte");
@@ -353,12 +358,33 @@ public class MnistIntroductionFragment extends Fragment  {
                     }
                 }
         );
+
+        layoutBusy.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.btnLoadToView)
     public void btnLoadToView_OnClick() {
         loadImageFromTest();
     }
+
+    @OnClick(R.id.btnShare)
+    public void btnShare_OnClick() {
+
+        Date d = new Date();
+        CharSequence strDateTime = DateFormat.format("yyyyMMddhhmmss", d.getTime());
+
+        strShareFilename = strDateTime + ".mnist";
+        File fOutfile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), strShareFilename);
+        strShareFullFilename = fOutfile.getAbsolutePath();
+
+        saveImage(strShareFullFilename);
+
+        sharePublicFileProvider(this, strShareFilename,
+                getString(R.string.app_name),
+                "Share a mnist file: " + strShareFilename,
+                REQUEST_SHARE);
+    }
+
 
     private void initTensorFlow() {
         inferenceInterface = new TensorFlowInferenceInterface(this.getActivity().getAssets(), MODEL_FILE);
@@ -418,11 +444,6 @@ public class MnistIntroductionFragment extends Fragment  {
             byte[] bHead = new byte[8];
             stream.read(bHead);
 
-//            int nCount = ((bHead[4] & 0xff) << 24)
-//                    | (( bHead[5] & 0xff) << 16)
-//                    | (( bHead[6] & 0xff) << 8)
-//                    | (( bHead[7] & 0xff));
-
             int nCount = nEvalCount; // reduce to 100;
 
             arrLongLabel = new long[nCount];
@@ -453,11 +474,6 @@ public class MnistIntroductionFragment extends Fragment  {
 
             byte[] bHead = new byte[8];
             stream.read(bHead);
-
-//            int nCount = ((bHead[4] & 0xff) << 24)
-//                    | (( bHead[5] & 0xff) << 16)
-//                    | (( bHead[6] & 0xff) << 8)
-//                    | (( bHead[7] & 0xff));
 
             int nCount = nEvalCount; // reduce to 100;
 
@@ -491,11 +507,6 @@ public class MnistIntroductionFragment extends Fragment  {
 
             byte[] bHead = new byte[16];
             stream.read(bHead);
-
-//            int nCount = ((bHead[4] & 0xff) << 24)
-//                    | (( bHead[5] & 0xff) << 16)
-//                    | (( bHead[6] & 0xff) << 8)
-//                    | (( bHead[7] & 0xff));
 
             int nCount = nEvalCount; // reduce to 100;
 
@@ -566,6 +577,34 @@ public class MnistIntroductionFragment extends Fragment  {
         mModel.endLine();
     }
 
+    private void saveImage(String strFilename) {
+        ;
+        int[] arrData = mDrawView.getPixels();
+        byte[] arrBytes = new byte[arrData.length];
+
+        for(int i=0; i<arrData.length; i++) {
+            arrBytes[i] = (byte)arrData[i];
+        }
+
+        File fOutDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        if (!fOutDir.exists()) {
+            fOutDir.mkdir();
+        }
+
+        FileOutputStream fos = null;
+        try {
+            //fos = getContext().openFileOutput(strFilename, Context.MODE_PRIVATE);
+            fos = new FileOutputStream(strFilename);
+            fos.write(arrBytes);
+            fos.close();
+
+            String strMsg = String.format("The %s file has been saved successfully.", strFilename);
+            Toast.makeText(getContext(), strMsg, Toast.LENGTH_SHORT).show();
+        } catch (IOException ex) {
+            Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void loadImage(String strFilename) {
 
         byte[] arrBytes = new byte[28*28];
@@ -585,7 +624,12 @@ public class MnistIntroductionFragment extends Fragment  {
             arrData[i] = (int)arrBytes[i];
         }
 
+        mModel.clear();
+        mDrawView.reset();
+        mDrawView.invalidate();
+
         mDrawView.setPixels(arrData, arrData.length);
+        mDrawView.invalidate();
     }
 
     private void loadImageFromTest() {
@@ -598,7 +642,13 @@ public class MnistIntroductionFragment extends Fragment  {
         for(int i=0; i<28*28; i++) {
             arrDisplayImage[i] = (int)arrTestImages[nPos*28*28 + i];
         }
+
+        mModel.clear();
+        mDrawView.reset();
+        mDrawView.invalidate();
+
         mDrawView.setPixels(arrDisplayImage, 28*28);
+        mDrawView.invalidate();
     }
 
 
@@ -613,6 +663,26 @@ public class MnistIntroductionFragment extends Fragment  {
             Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    private void sharePublicFileProvider(Fragment fragBase, String strFileName, String subject, String Body, int nReqest_code) {
+
+        File fOutfile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), strFileName);
+        Uri fileUri = FileProvider.getUriForFile(fragBase.getContext(),
+                BuildConfig.APPLICATION_ID + ".provider",
+                fOutfile);
+
+        Log.d(TAG, "sending "+fileUri.toString()+" ...");
+
+        Intent shareIntent = new Intent();
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, Body);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+        shareIntent.setType("application/octet-stream");
+        shareIntent.setAction(Intent.ACTION_SEND);
+        fragBase.startActivityForResult(Intent.createChooser(shareIntent, "Share a file."), nReqest_code);
+    }
+
 
     private void initInfo() {
         String strInfo = "The optimized model source: <br/>";

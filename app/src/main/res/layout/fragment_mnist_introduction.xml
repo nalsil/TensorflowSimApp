@@ -18,16 +18,42 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/layoutBusy"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ProgressBar
+                android:id="@+id/pbHeaderProgress"
+                style="@style/Base.Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </ProgressBar>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Processing ..."
+                android:id="@+id/tvLoading" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/layoutDraw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/layoutInfo"
+            android:background="@color/sunday_text_color"
             android:orientation="vertical">
 
             <com.nalsil.tensorflowsimapp.view.DrawView
                 android:id="@+id/vwDraw"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1" />
 
 
@@ -61,6 +87,22 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
                     android:text="Detect" />
 
                 <Button
+                    android:id="@+id/btnShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Share" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,7 +123,9 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
                     android:layout_weight="1"
                     android:text="Delete" />
 
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
