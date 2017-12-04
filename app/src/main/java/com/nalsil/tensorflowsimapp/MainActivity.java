@@ -201,9 +201,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_MnistIntroduction:
                 fragmentClass = MnistIntroductionFragment.class;
                 break;
+            case R.id.nav_XorNNWideDeep:
+                fragmentClass = XorNNWideDeepFragment.class;
+                break;
 
-
-            //
             default:
                 fragmentClass = TOCFragment.class;
         }
@@ -260,6 +261,8 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_LearningRateAndEvaluation);
         } else if (strItem.equals(MnistIntroductionFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_MnistIntroduction);
+        } else if (strItem.equals(XorNNWideDeepFragment.class.getSimpleName())) {
+            onNavigationItemById(R.id.nav_XorNNWideDeep);
         } else {
             onNavigationItemById(R.id.nav_toc);
         }

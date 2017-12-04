@@ -47,6 +47,10 @@
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="Mnist Introduction" />
 
+            <item
+                android:id="@+id/nav_XorNNWideDeep"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="XOR_NN_Wide_Deep" />
         </menu>
 
     </item>
