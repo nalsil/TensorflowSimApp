@@ -43,14 +43,50 @@
                 android:title="Learning Rate and Evaluation" />
 
             <item
-                android:id="@+id/nav_MnistIntroduction"
+                android:id="@+id/nav_MNISTIntroduction"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Mnist Introduction" />
+                android:title="MNIST Introduction" />
 
             <item
                 android:id="@+id/nav_XorNNWideDeep"
                 android:icon="@drawable/ic_menu_gallery"
                 android:title="XOR_NN_Wide_Deep" />
+
+            <item
+                android:id="@+id/nav_MNISTSoftmax"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST SOFTMAX" />
+
+            <item
+                android:id="@+id/nav_MNISTNN"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST NN" />
+
+            <item
+                android:id="@+id/nav_MNISTNNXavier"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST NN Xavier" />
+
+            <item
+                android:id="@+id/nav_MNISTNNDeep"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST NN Deep" />
+
+            <item
+                android:id="@+id/nav_MNISTNNDropout"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST NN Dropout" />
+
+            <item
+                android:id="@+id/nav_MNISTCNN"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST CNN" />
+
+            <item
+                android:id="@+id/nav_MNISTDEEPCNN"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="MNIST Deep CNN" />
+
         </menu>
 
     </item>

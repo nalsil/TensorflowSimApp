@@ -84,7 +84,8 @@ public class Utility {
             }
             //Sort the files and directories in alphabetical order.
             //See compareTo method in FileListItem class.
-            Collections.sort(internalList);
+            //Collections.sort(internalList);
+            Collections.reverse(internalList);
         }
         catch (NullPointerException e)
         {   //Just dont worry, it rarely occurs.

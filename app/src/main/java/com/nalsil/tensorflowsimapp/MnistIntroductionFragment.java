@@ -80,9 +80,11 @@ public class MnistIntroductionFragment extends Fragment  {
     private final static int REQUEST_EXT_STORAGE_PERMIT = 9001;
     private final static int REQUEST_SHARE = 9002;
 
-    private static final String MODEL_FILE = "file:///android_asset/optimized_lab_07_4_mnist_introduction.pb";
+    private String strModelFileFormat = "file:///android_asset/%s";
+    private String strUrlFormat = "<a href='%s'>%s</a>";
     private static final String INPUT_NODE_X = "X";
     private static final String INPUT_NODE_Y = "Y";
+    private static final String INPUT_NODE_KEEP_PROB = "keep_prob";
     private static final String OUTPUT_NODE_HYPO = "hypothesis";
     private static final String OUTPUT_NODE_PRED = "prediction";
     private static final String OUTPUT_NODE_ACCU = "accuracy";
@@ -95,19 +97,24 @@ public class MnistIntroductionFragment extends Fragment  {
 
     private long[] arrTestLabel;
     private float[] arrTestLabelOneHot;
-    private float[] arrTestImages;
-    private ArrayList<Integer> arrFailed;
-    private final static int nEvalCount = 1000;
+    private FloatBuffer bufTestImages;
+    private int nEvalCount = 10000;
     private static int[] arrDisplayImage = new int[28*28];
     private String strShareFilename = "";
     private String strShareFullFilename = "";
 
-    //================ For Mnist
+    // ================ For Mnist ================
     private static final int PIXEL_WIDTH = 28;
     private DrawModel mModel;
     private float mLastX;
     private float mLastY;
     private PointF mTmpPoint = new PointF();
+
+    // ================ For Arguments ================
+    private String strTitle = "";
+    private String strUrl = "";
+    private String strUrlTitle = "";
+    private String strModelFile = "";
 
     @BindView(R.id.vwDraw)DrawView mDrawView;
 
@@ -123,6 +130,7 @@ public class MnistIntroductionFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_mnist_introduction, container, false);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
         unbinder = ButterKnife.bind(this, view);
+        initArgs();
         initInfo();
         initAds();
         initTensorFlow();
@@ -204,14 +212,14 @@ public class MnistIntroductionFragment extends Fragment  {
         float pixels[] = mDrawView.getPixelData();
 
         try {
-            float[] results = hypothesis(pixels, PIXEL_WIDTH * PIXEL_WIDTH, 10);
+            float[] results = hypothesis(FloatBuffer.wrap(pixels), PIXEL_WIDTH * PIXEL_WIDTH, 10);
             tvOutput2.setText(Arrays.toString(results));
         } catch (Exception ex) {
             Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         try {
-            long[] results = predict(pixels, PIXEL_WIDTH * PIXEL_WIDTH, 10);
+            long[] results = predict(FloatBuffer.wrap(pixels), PIXEL_WIDTH * PIXEL_WIDTH, 10);
             tvOutput1.setText("Number is " + Arrays.toString(results));
         } catch (Exception ex) {
             Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -316,33 +324,46 @@ public class MnistIntroductionFragment extends Fragment  {
     @OnClick(R.id.btnAccuracy)
     public void btnAccuracy_OnClick() {
 
-        layoutBusy.setVisibility(View.VISIBLE);
+        //layoutBusy.setVisibility(View.VISIBLE);
+        if (strModelFile.contains("cnn")) {
+            nEvalCount = 1000;
+        }
 
         arrTestLabel = readMnistLabel("t10k-labels.idx1-ubyte");
         arrTestLabelOneHot = readMnistLabelwithOneHotEncoding("t10k-labels.idx1-ubyte");
-        arrTestImages = readMnistImage("t10k-images.idx3-ubyte");
+        bufTestImages = readMnistImageBuf("t10k-images.idx3-ubyte");
 
-        List<String> arrSpinnerData = new ArrayList<String>();
-        arrFailed = new ArrayList<Integer>();
-        long[] arrPredicted = predict(arrTestImages, 28*28, 10);
+        List<KeyNameValue> arrSpinnerData = new ArrayList<KeyNameValue>();
+
+        long[] arrPredicted = {};
+        try {
+            arrPredicted = predict(bufTestImages, 28 * 28, 10);
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
         for(int i=0; i<arrPredicted.length; i++) {
             String strPredictResult= "";
             if(arrPredicted[i] != arrTestLabel[i]) {
-                arrFailed.add(i);
                 strPredictResult = "F";
+                String strMsg = String.format("%04d-%s-L:%d-P:%d", i, strPredictResult, arrTestLabel[i], arrPredicted[i]);
+                arrSpinnerData.add(new KeyNameValue(i, strMsg));
             } else {
                 strPredictResult = "T";
             }
-            String strMsg = String.format("%04d-%s-L:%d-P:%d", i, strPredictResult, arrTestLabel[i], arrPredicted[i]);
-            arrSpinnerData.add(strMsg);
         }
 
-        float[] accu = accuracy(arrTestImages, arrTestLabelOneHot, 28*28, 10);
-        String strMsg = String.format("Accuracy %d of 10,000 = ", nEvalCount);
+        float[] accu = {};
+        try {
+            accu = accuracy(bufTestImages, arrTestLabelOneHot, 28 * 28, 10);
+        } catch (Exception ex) {
+            Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        String strMsg = String.format("Accuracy[# of Fail: %d ]= ", arrSpinnerData.size());
         tvOutput1.setText(strMsg + Arrays.toString(accu) );
 
         //====================== create dataAdaptor for spFailed ======================
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, arrSpinnerData);
+        ArrayAdapter<KeyNameValue> dataAdapter = new ArrayAdapter<KeyNameValue>(getContext(), android.R.layout.simple_spinner_item, arrSpinnerData);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spFailed.setAdapter(dataAdapter);
         spFailed.setSelection(0);
@@ -387,15 +408,18 @@ public class MnistIntroductionFragment extends Fragment  {
 
 
     private void initTensorFlow() {
-        inferenceInterface = new TensorFlowInferenceInterface(this.getActivity().getAssets(), MODEL_FILE);
+        inferenceInterface = new TensorFlowInferenceInterface(this.getActivity().getAssets(), String.format(strModelFileFormat, strModelFile));
     }
 
-    private float[] hypothesis(float[] inputFloats, int nFeatures, int nClasses) {
+    private float[] hypothesis(FloatBuffer floatBuf, int nFeatures, int nClasses) {
 
-        int nInstance = inputFloats.length / nFeatures;
-        FloatBuffer.wrap(inputFloats);
+        int nInstance = (floatBuf.capacity() / nFeatures);
 
-        inferenceInterface.feed(INPUT_NODE_X, inputFloats, nInstance, nFeatures);
+        inferenceInterface.feed(INPUT_NODE_X, floatBuf, nInstance, nFeatures);
+        if (strModelFile.contains("dropout") || strModelFile.contains("deep_cnn")) {
+            inferenceInterface.feed(INPUT_NODE_KEEP_PROB, new float[]{1.0f}, 1, 1);
+        }
+
         inferenceInterface.run(OUTPUT_NODES_HYPO, logStats);
 
         float[] result = new float[nInstance * nClasses];
@@ -403,12 +427,16 @@ public class MnistIntroductionFragment extends Fragment  {
         return result;
     }
 
-    private long[] predict(float[] inputFloats, int nFeatures, int nClasses) {
+    private long[] predict(FloatBuffer floatBuf, int nFeatures, int nClasses) {
 
-        int nInstance = inputFloats.length / nFeatures;
-        FloatBuffer.wrap(inputFloats);
+        int nInstance = (floatBuf.capacity() / nFeatures);
+        floatBuf.rewind();
 
-        inferenceInterface.feed(INPUT_NODE_X, inputFloats, nInstance, nFeatures);
+        inferenceInterface.feed(INPUT_NODE_X, floatBuf, nInstance, nFeatures);
+        if (strModelFile.contains("dropout") || strModelFile.contains("deep_cnn")) {
+            inferenceInterface.feed(INPUT_NODE_KEEP_PROB, new float[]{1.0f}, 1, 1);
+        }
+
         inferenceInterface.run(OUTPUT_NODES_PRED, logStats);
 
         long[] result = new long[nInstance * 1];
@@ -416,13 +444,17 @@ public class MnistIntroductionFragment extends Fragment  {
         return result;
     }
 
-    private float[] accuracy(float[] inputFloatsX, float[] inputFloatsY, int nFeatures, int nClasses) {
+    private float[] accuracy(FloatBuffer floatBuf, float[] inputFloatsY, int nFeatures, int nClasses) {
 
-        int nInstance = inputFloatsX.length / nFeatures;
-        FloatBuffer.wrap(inputFloatsX);
+        int nInstance = (floatBuf.capacity() / nFeatures);
+        floatBuf.rewind();
 
-        inferenceInterface.feed(INPUT_NODE_X, inputFloatsX, nInstance, nFeatures);
+        inferenceInterface.feed(INPUT_NODE_X, floatBuf, nInstance, nFeatures);
         inferenceInterface.feed(INPUT_NODE_Y, inputFloatsY, nInstance, nClasses);
+        if (strModelFile.contains("dropout") || strModelFile.contains("deep_cnn")) {
+            inferenceInterface.feed(INPUT_NODE_KEEP_PROB, new float[]{1.0f}, 1, 1);
+        }
+
         inferenceInterface.run(OUTPUT_NODES_ACCU, logStats);
 
         float[] result = new float[1];
@@ -444,13 +476,11 @@ public class MnistIntroductionFragment extends Fragment  {
             byte[] bHead = new byte[8];
             stream.read(bHead);
 
-            int nCount = nEvalCount; // reduce to 100;
-
-            arrLongLabel = new long[nCount];
-            byte[] bBody = new byte[nCount];
+            arrLongLabel = new long[ nEvalCount];
+            byte[] bBody = new byte[ nEvalCount];
             stream.read(bBody);
 
-            for(int i=0; i<nCount; i++) {
+            for(int i=0; i<nEvalCount; i++) {
                 arrLongLabel[i] = (long)bBody[i];
             }
             stream.close();
@@ -475,13 +505,11 @@ public class MnistIntroductionFragment extends Fragment  {
             byte[] bHead = new byte[8];
             stream.read(bHead);
 
-            int nCount = nEvalCount; // reduce to 100;
-
-            arrFloatLabel = new float[nCount*10];
-            byte[] bBody = new byte[nCount];
+            arrFloatLabel = new float[nEvalCount*10];
+            byte[] bBody = new byte[nEvalCount];
             stream.read(bBody);
 
-            for(int i=0; i<nCount; i++) {
+            for(int i=0; i<nEvalCount; i++) {
                 int nIdx = (bBody[i] & 0xff);
                 int newIdx = nIdx + i*10;
                 arrFloatLabel[newIdx] = 1.0f;
@@ -494,9 +522,9 @@ public class MnistIntroductionFragment extends Fragment  {
         return arrFloatLabel;
     }
 
-    private float[] readMnistImage(String strFilename) {
+    private FloatBuffer readMnistImageBuf(String strFilename) {
 
-        float[] arrFloatImage = {};
+        FloatBuffer buf = FloatBuffer.allocate(nEvalCount*28*28);
         try {
             InputStream stream = getContext().getAssets().open(strFilename);
 
@@ -508,21 +536,19 @@ public class MnistIntroductionFragment extends Fragment  {
             byte[] bHead = new byte[16];
             stream.read(bHead);
 
-            int nCount = nEvalCount; // reduce to 100;
-
-            arrFloatImage = new float[nCount*28*28];
-            byte[] bBody = new byte[nCount*28*28];
-            stream.read(bBody);
-
-            for(int i=0; i<nCount*28*28; i++) {
-                arrFloatImage[i] = (float)(bBody[i] & 0xff);
+            byte[] bBody = new byte[100*28*28];
+            for(int i=0; i<(int)(nEvalCount/100); i++) {
+                stream.read(bBody);
+                for(int j=0; j<100*28*28; j++) {
+                    buf.put( (float)(bBody[j] & 0xff));
+                }
             }
             stream.close();
         } catch (Exception ex) {
             Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        return arrFloatImage;
+        return buf;
     }
 
     private void initMnistView() {
@@ -634,13 +660,16 @@ public class MnistIntroductionFragment extends Fragment  {
 
     private void loadImageFromTest() {
 
-        if (arrTestImages == null) {
+        if (bufTestImages == null) {
             return;
         }
 
-        int nPos = spFailed.getSelectedItemPosition();
+        //int nPos = spFailed.getSelectedItemPosition();
+        KeyNameValue keyItem = (KeyNameValue)spFailed.getSelectedItem();
+        int nPos = keyItem.getId();
+        bufTestImages.position(nPos*28*28);
         for(int i=0; i<28*28; i++) {
-            arrDisplayImage[i] = (int)arrTestImages[nPos*28*28 + i];
+            arrDisplayImage[i] = (int)bufTestImages.get();
         }
 
         mModel.clear();
@@ -683,10 +712,18 @@ public class MnistIntroductionFragment extends Fragment  {
         fragBase.startActivityForResult(Intent.createChooser(shareIntent, "Share a file."), nReqest_code);
     }
 
+    private void initArgs() {
+        if (getArguments() != null) {
+            strTitle = getArguments().getString(Constants.fragMnistTitle);
+            strUrl = getArguments().getString(Constants.fragMnistUrl);
+            strUrlTitle = getArguments().getString(Constants.fragMnistUrlTitle);
+            strModelFile = getArguments().getString(Constants.fragMnistModelFile);
+        }
+    }
 
     private void initInfo() {
         String strInfo = "The optimized model source: <br/>";
-        strInfo = strInfo + "<a href='https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py'>* lab-07-4-mnist_introduction_model</a>";
+        strInfo = strInfo + String.format(strUrlFormat, strUrl, strUrlTitle);
         tvInfo.setText(Html.fromHtml(strInfo));
         tvInfo.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -706,6 +743,50 @@ public class MnistIntroductionFragment extends Fragment  {
         mAdView.loadAd(adRequest);
     }
 
+    public class KeyNameValue {
 
+        private int id;
+        private String name;
+
+        public KeyNameValue(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+
+        //to display object as a string in spinner
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(obj instanceof KeyNameValue){
+                KeyNameValue c = (KeyNameValue)obj;
+                if(c.getName().equals(name) && c.getId()==id ) return true;
+            }
+
+            return false;
+        }
+
+    }
 
 }

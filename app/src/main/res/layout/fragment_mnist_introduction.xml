@@ -172,6 +172,7 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
                     android:id="@+id/tvOutput2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
                     android:paddingLeft="10dp" />
 
             </LinearLayout>

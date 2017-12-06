@@ -69,8 +69,16 @@ public class TOCFragment extends Fragment {
         strInfo1 += "<li><a href=\"fragment://" + LogisticRegressionFragment.class.getSimpleName() + "\"> Logistic Regression </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-05-1-logistic_regression_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + SoftmaxClassifierFragment.class.getSimpleName() + "\"> Softmax Classifier </a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-06-1-softmax_classifier_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + LearningRateAndEvaluationFragment.class.getSimpleName() + "\"> Learning Rate and Evaluation</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-1-learning_rate_and_evaluation_model.py\">this source</a> </li> ";
-        strInfo1 += "<li><a href=\"fragment://" + MnistIntroductionFragment.class.getSimpleName() + "\"> Mnist Introduction</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTIntroduction" + "\"> MNIST Introduction</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py\">this source</a> </li> ";
         strInfo1 += "<li><a href=\"fragment://" + XorNNWideDeepFragment.class.getSimpleName() + "\"> XOR-NN-Wide-Deep</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-09-3-xor-nn-wide-deep_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTSoftmax" + "\"> MNIST Softmax</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-1-mnist_softmax_model.py\">this source</a> </li> ";
+
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTNN" + "\"> MNIST NN</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-2-mnist_nn_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTNNXavier" + "\"> MNIST NN Xavier</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-3-mnist_nn_xavier_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTNNDeep" + "\"> MNIST NN Deep</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-4-mnist_nn_deep_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTNNDropout" + "\"> MNIST NN Dropout</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-5-mnist_nn_dropout_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTCNN" + "\"> MNIST CNN</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-11-1-mnist_cnn_model.py\">this source</a> </li> ";
+        strInfo1 += "<li><a href=\"fragment://" + "nav_MNISTDEEPCNN" + "\"> MNIST Deep CNN</a>, using *.pb created by <a href=\"https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-11-2-mnist_deep_cnn_model.py\">this source</a> </li> ";
 
         strInfo1 += "</ul>";
         strInfo1 += "<br/><br/>";

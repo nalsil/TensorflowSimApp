@@ -53,6 +53,4 @@
     <string name="permit_desc_firebase_analytics">Analyze user screen visits (firebase-analytics)</string>
     <string name="permit_desc_firebase_ads">Display banner ads (firebase-ads)</string>
 
-
-
 </resources>

@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
         Class fragmentClass;
+        Bundle args = new Bundle();
 
         switch (id) {
             case R.id.nav_toc:
@@ -198,12 +199,74 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_LearningRateAndEvaluation:
                 fragmentClass = LearningRateAndEvaluationFragment.class;
                 break;
-            case R.id.nav_MnistIntroduction:
+            case R.id.nav_MNISTIntroduction:
                 fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-07-4-mnist_introduction_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-07-4-mnist_introduction_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_07_4_mnist_introduction.pb");
                 break;
+
             case R.id.nav_XorNNWideDeep:
                 fragmentClass = XorNNWideDeepFragment.class;
                 break;
+
+            case R.id.nav_MNISTSoftmax:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-1-mnist_softmax_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-10-1-mnist_softmax_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_10_1_mnist_softmax.pb");
+                break;
+
+            case R.id.nav_MNISTNN:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-2-mnist_nn_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-10-2-mnist_nn_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_10_2_mnist_nn.pb");
+                break;
+
+            case R.id.nav_MNISTNNXavier:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-3-mnist_nn_xavier_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-10-3-mnist_nn_xavier_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_10_3_mnist_nn_xavier.pb");
+                break;
+
+            case R.id.nav_MNISTNNDeep:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-4-mnist_nn_deep_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-10-4-mnist_nn_deep_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_10_4_mnist_nn_deep.pb");
+                break;
+
+            case R.id.nav_MNISTNNDropout:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-10-5-mnist_nn_dropout_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-10-5-mnist_nn_dropout_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_10_5_mnist_nn_dropout.pb");
+                break;
+
+            case R.id.nav_MNISTCNN:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-11-1-mnist_cnn_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-11-1-mnist_cnn_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_11_1_mnist_cnn.pb");
+                break;
+
+            case R.id.nav_MNISTDEEPCNN:
+                fragmentClass = MnistIntroductionFragment.class;
+
+                args.putString(Constants.fragMnistUrl, "https://github.com/nalsil/DeepLearningZeroToAll/blob/master/lab-11-2-mnist_deep_cnn_model.py");
+                args.putString(Constants.fragMnistUrlTitle, "* lab-11-2-mnist_deep_cnn_model");
+                args.putString(Constants.fragMnistModelFile, "optimized_lab_11_2_mnist_deep_cnn.pb");
+                break;
+
 
             default:
                 fragmentClass = TOCFragment.class;
@@ -211,6 +274,8 @@ public class MainActivity extends AppCompatActivity
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(args);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -259,10 +324,25 @@ public class MainActivity extends AppCompatActivity
             onNavigationItemById(R.id.nav_SoftmaxClassifier);
         } else if (strItem.equals(LearningRateAndEvaluationFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_LearningRateAndEvaluation);
-        } else if (strItem.equals(MnistIntroductionFragment.class.getSimpleName())) {
-            onNavigationItemById(R.id.nav_MnistIntroduction);
         } else if (strItem.equals(XorNNWideDeepFragment.class.getSimpleName())) {
             onNavigationItemById(R.id.nav_XorNNWideDeep);
+        } else if (strItem.equals("nav_MNISTIntroduction")) {
+            onNavigationItemById(R.id.nav_MNISTIntroduction);
+        } else if (strItem.equals("nav_MNISTSoftmax")) {
+            onNavigationItemById(R.id.nav_MNISTSoftmax);
+        } else if (strItem.equals("nav_MNISTNN")) {
+            onNavigationItemById(R.id.nav_MNISTNN);
+        } else if (strItem.equals("nav_MNISTNNXavier")) {
+            onNavigationItemById(R.id.nav_MNISTNNXavier);
+        } else if (strItem.equals("nav_MNISTNNDeep")) {
+            onNavigationItemById(R.id.nav_MNISTNNDeep);
+        } else if (strItem.equals("nav_MNISTNNDropout")) {
+            onNavigationItemById(R.id.nav_MNISTNNDropout);
+        } else if (strItem.equals("nav_MNISTCNN")) {
+            onNavigationItemById(R.id.nav_MNISTCNN);
+        } else if (strItem.equals("nav_MNISTDEEPCNN")) {
+            onNavigationItemById(R.id.nav_MNISTDEEPCNN);
+
         } else {
             onNavigationItemById(R.id.nav_toc);
         }
