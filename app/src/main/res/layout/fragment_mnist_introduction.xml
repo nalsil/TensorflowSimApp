@@ -73,18 +73,18 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnClear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Clear" />
-
-                <Button
                     android:id="@+id/btnDetect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Detect" />
+
+                <Button
+                    android:id="@+id/btnClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Clear" />
 
                 <Button
                     android:id="@+id/btnShare"
@@ -172,8 +172,10 @@ tools:context="com.nalsil.tensorflowsimapp.MnistIntroductionFragment">
                     android:id="@+id/tvOutput2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autoSizeTextType="uniform"
-                    android:paddingLeft="10dp" />
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true" />
 
             </LinearLayout>
 

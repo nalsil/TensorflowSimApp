@@ -552,6 +552,9 @@ public class MnistIntroductionFragment extends Fragment  {
     }
 
     private void initMnistView() {
+
+        tvOutput2.setSelected(true);
+
         mModel = new DrawModel(PIXEL_WIDTH, PIXEL_WIDTH);
         mDrawView.setModel(mModel);
         mDrawView.setOnTouchListener(new View.OnTouchListener() {
@@ -601,6 +604,7 @@ public class MnistIntroductionFragment extends Fragment  {
 
     private void processTouchUp() {
         mModel.endLine();
+        btnDetect_OnClick();
     }
 
     private void saveImage(String strFilename) {
